@@ -1,0 +1,151 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Jawlati brand system. Only brand colors are allowed.
+ * Swap the app font by changing --font-app only.
+ */
+
+@theme inline {
+  --font-sans: var(--font-app);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-national: var(--national);
+  --color-leaf: var(--leaf);
+  --color-mint: var(--mint);
+  --color-arfaj: var(--arfaj);
+  --color-sun: var(--sun);
+  --color-water: var(--water);
+  --color-ink: var(--ink);
+  --color-teal: var(--teal);
+  --color-blue: var(--blue);
+  --color-purple: var(--purple);
+  --color-alert: var(--alert);
+  --color-chart-1: var(--leaf);
+  --color-chart-2: var(--teal);
+  --color-chart-3: var(--blue);
+  --color-chart-4: var(--purple);
+  --color-chart-5: var(--alert);
+  --color-sidebar: var(--background);
+  --color-sidebar-foreground: var(--foreground);
+  --color-sidebar-primary: var(--primary);
+  --color-sidebar-primary-foreground: var(--primary-foreground);
+  --color-sidebar-accent: var(--accent);
+  --color-sidebar-accent-foreground: var(--accent-foreground);
+  --color-sidebar-border: var(--border);
+  --color-sidebar-ring: var(--ring);
+}
+
+:root {
+  --font-app: "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --radius: 0.875rem;
+
+  /* brand (hex from guidelines) */
+  --national: #0b4332;
+  --leaf: #009c6d;
+  --mint: #bcffbb;
+  --arfaj: #fff1b1;
+  --sun: #ffe2c1;
+  --water: #dceef8;
+  --white: #ffffff;
+  --ink: #1d1d1d;
+  /* charts & status only */
+  --teal: #14a0b3;
+  --blue: #5578d8;
+  --purple: #a484d8;
+  --alert: #e17141;
+
+  --background: var(--white);
+  --foreground: var(--ink);
+  --card: var(--white);
+  --card-foreground: var(--ink);
+  --popover: var(--white);
+  --popover-foreground: var(--ink);
+  --primary: var(--national);
+  --primary-foreground: var(--white);
+  --secondary: var(--water);
+  --secondary-foreground: var(--national);
+  --muted: var(--water);
+  --muted-foreground: color-mix(in oklab, var(--ink) 65%, var(--white));
+  --accent: var(--mint);
+  --accent-foreground: var(--national);
+  --destructive: var(--alert);
+  --destructive-foreground: var(--ink);
+  --border: color-mix(in oklab, var(--national) 14%, var(--white));
+  --input: color-mix(in oklab, var(--national) 20%, var(--white));
+  --ring: var(--leaf);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    font-family: var(--font-app);
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-weight: 400;
+  }
+  h1,
+  h2,
+  h3 {
+    font-weight: 700;
+    color: var(--national);
+  }
+  em,
+  i {
+    font-style: normal;
+  }
+}
+
+@utility page-bg {
+  background-color: color-mix(in oklab, var(--water) 55%, var(--white));
+  position: relative;
+  isolation: isolate;
+  /* NHC leaf pattern, fixed to the bottom-left corner of every page, behind the content */
+  &::before {
+    content: "";
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: -1;
+    width: clamp(150px, 26vw, 360px);
+    height: 100vh;
+    background: url("/brand/nhc-pattern.png") left bottom / contain no-repeat;
+    opacity: 0.22;
+    pointer-events: none;
+  }
+  @media print {
+    &::before {
+      display: none;
+    }
+  }
+}

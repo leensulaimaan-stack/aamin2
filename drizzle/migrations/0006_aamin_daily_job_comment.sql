@@ -1,0 +1,1 @@
+COMMENT ON FUNCTION public._daily_job() IS 'Aamin daily job: monthly inspections, time-based reclassification, notifications';
